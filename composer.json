@@ -1,0 +1,45 @@
+{
+    "name": "honey-comb/addresses",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/honey-comb/addresses",
+    "license": "MIT",
+    "authors": [],
+    "repositories": [],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "5.5.*",
+        "honey-comb/starter": "0.2.*",
+        "honey-comb/regions": "0.1.*"
+    },
+    "require-dev": {
+        "brianium/paratest": "^1.0",
+        "mockery/mockery": "^1.0",
+        "orchestra/testbench-browser-kit": "^3.5",
+        "phpunit/phpunit": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HoneyComb\\Addresses\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "paratest -p4 --colors"
+        ]
+    },
+    "config": {
+        "secure-http": false,
+        "platform": {
+            "php": "7.1"
+        }
+    }
+}

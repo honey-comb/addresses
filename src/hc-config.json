@@ -1,0 +1,14 @@
+{
+    "general": {
+        "packageName": "HCAddress",
+        "sequence": 0,
+        "namespace": "HoneyComb\\Addresses\\"
+    },
+    "formData": {},
+    "adminMenu": [],
+    "seeder": "",
+    "routes": [],
+    "acl": {
+        "permissions": []
+    }
+}
