@@ -24,8 +24,10 @@ class CreateHcAddressTable extends Migration
             $table->string('address_line');
             $table->string('postal_code', 20);
             $table->uuid('city_id')->index();
+            $table->uuid('user_id')->index();
 
             $table->foreign('city_id')->references('id')->on('hc_region_city');
+            $table->foreign('user_id')->references('id')->on('hc_user');
         });
     }
 
