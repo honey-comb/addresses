@@ -4,11 +4,36 @@
         "sequence": 0,
         "namespace": "HoneyComb\\Addresses\\"
     },
-    "formData": {},
-    "adminMenu": [],
+    "formData": {
+        "address": "HoneyComb\\Addresses\\Forms\\HCAddressForm"
+    },
+    "adminMenu": [
+        {
+            "route": "admin.address.index",
+            "parent": "admin.index",
+            "translation": "HCAddress::address.page_title",
+            "icon": "map-marker",
+            "aclPermission": "honey_comb_addresses_address_list"
+        }
+    ],
     "seeder": "",
-    "routes": [],
+    "routes": [
+        "Routes\/Admin\/routes.address.php"
+    ],
     "acl": {
-        "permissions": []
+        "permissions": [
+            {
+                "name": "acl.address",
+                "controller": "HoneyComb\\Addresses\\Http\\Controllers\\Admin\\HCAddressController",
+                "actions": [
+                    "honey_comb_addresses_address_update",
+                    "honey_comb_addresses_address_create",
+                    "honey_comb_addresses_address_delete",
+                    "honey_comb_addresses_address_delete_force",
+                    "honey_comb_addresses_address_restore",
+                    "honey_comb_addresses_address_list"
+                ]
+            }
+        ]
     }
 }
