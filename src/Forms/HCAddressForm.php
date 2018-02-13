@@ -30,6 +30,7 @@ declare(strict_types = 1);
 namespace HoneyComb\Addresses\Forms;
 
 use HoneyComb\Core\Repositories\HCUserRepository;
+use HoneyComb\Regions\Http\Requests\HCCountryRequest;
 use HoneyComb\Regions\Repositories\HCCountryRepository;
 use HoneyComb\Starter\Forms\HCBaseForm;
 
@@ -98,7 +99,7 @@ class HCAddressForm extends HCBaseForm
                     'type' => 'dropDownList',
                     'label' => trans('HCAddress::address.country'),
                     'required' => 1,
-                    'options' => optimizeTranslationOptions($this->countryRepository->all()),
+                    'options' => $this->countryRepository->getOptions(new HCCountryRequest())
                 ],
             $prefix . 'city_id' =>
                 [
