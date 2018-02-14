@@ -40,7 +40,12 @@ class HCAddressRequest extends FormRequest
      */
     public function getRecordData(): array
     {
-        return $this->all();
+        $data = $this->all();
+        $data['user_id'] = $data['user']['id'];
+
+        array_forget($data, ['user']);
+
+        return $data;
     }
 
     /**
@@ -92,7 +97,7 @@ class HCAddressRequest extends FormRequest
                     'address_line' => 'required',
                     'postal_code' => 'required',
                     'city_id' => 'required|exists:hc_region_city,id',
-                    'user_id' => 'required|exists:hc_user,id'
+                    'user' => 'required'
                 ];
 
             case 'PUT':
@@ -101,7 +106,7 @@ class HCAddressRequest extends FormRequest
                     'address_line' => 'required',
                     'postal_code' => 'required',
                     'city_id' => 'required|exists:hc_region_city,id',
-                    'user_id' => 'required|exists:hc_user,id'
+                    'user' => 'required'
                 ];
 
             case 'DELETE':

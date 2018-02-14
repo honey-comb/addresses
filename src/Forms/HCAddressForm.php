@@ -29,6 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Addresses\Forms;
 
+use HoneyComb\Core\Http\Requests\HCUserRequest;
 use HoneyComb\Core\Repositories\HCUserRepository;
 use HoneyComb\Regions\Http\Requests\HCCountryRequest;
 use HoneyComb\Regions\Repositories\HCCountryRepository;
@@ -125,17 +126,13 @@ class HCAddressForm extends HCBaseForm
                     'label' => trans('HCAddress::address.postal_code'),
                     'required' => 1,
                 ],
-            $prefix . 'user_id' =>
+            $prefix . 'user' =>
                 [
-                    'type' => 'dropDownList',
+                    'type' => 'dropDownSearchable',
                     'label' => trans('HCAddress::address.owner'),
                     'required' => 1,
-                    'options' => $this->userRepository->all()->map (function ($record){
-                        return [
-                            'id' => $record->id,
-                            'label' => $record->email
-                        ];
-                    })
+                    'searchUrl' => route('admin.api.user.options'),
+                    'originalLabel' => 'email'
                 ],
         ];
     }

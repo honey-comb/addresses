@@ -29,6 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Addresses\Models;
 
+use HoneyComb\Core\Models\HCUser;
 use HoneyComb\Core\Models\Traits\HCOwnership;
 use HoneyComb\Regions\Models\HCCity;
 use HoneyComb\Starter\Models\HCUuidModel;
@@ -60,7 +61,12 @@ class HCAddress extends HCUuidModel
      * @var array
      */
     protected $with = [
-        'city'
+        'city',
+        'user'
+    ];
+
+    protected $appends = [
+        'full_address',
     ];
 
     /**
@@ -69,5 +75,21 @@ class HCAddress extends HCUuidModel
     public function city ()
     {
         return $this->hasOne(HCCity::class, 'id', 'city_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user ()
+    {
+        return $this->hasOne(HCUser::class, 'id', 'user_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullAddressAttribute ()
+    {
+        return $this->address_line . ', ' . $this->city->translation->label;
     }
 }
