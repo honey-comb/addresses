@@ -67,7 +67,16 @@ class HCAddress extends HCUuidModel
 
     protected $appends = [
         'full_address',
+        'country_id'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function getCountryIdAttribute ()
+    {
+        return $this->city->country_id;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
