@@ -117,4 +117,19 @@ class HCAddressRequest extends FormRequest
 
         return [];
     }
+
+    /**
+     * Validating request for options
+     *
+     * Address requires user
+     *
+     * @return bool
+     */
+    public function readyForOptions(): bool
+    {
+        if ($this->has('user_id'))
+            return true;
+
+        return false;
+    }
 }

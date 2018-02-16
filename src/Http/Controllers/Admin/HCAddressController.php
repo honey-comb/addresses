@@ -218,4 +218,12 @@ class HCAddressController extends HCBaseController
         return $this->response->success('Successfully deleted');
     }
 
+    /**
+     * @param \HoneyComb\Addresses\Http\Requests\HCAddressRequest $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function getOptions (HCAddressRequest $request)
+    {
+        return $this->service->getRepository()->getOptions($request);
+    }
 }

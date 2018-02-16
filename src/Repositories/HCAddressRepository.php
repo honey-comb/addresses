@@ -4,9 +4,11 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Addresses\Repositories;
 
+use HoneyComb\Addresses\Http\Requests\HCAddressRequest;
 use HoneyComb\Addresses\Models\HCAddress;
 use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
+use Illuminate\Support\Collection;
 
 class HCAddressRepository extends HCBaseRepository
 {
@@ -55,6 +57,7 @@ class HCAddressRepository extends HCBaseRepository
      *
      * @param array $ids
      * @return void
+     * @throws \Exception
      */
     public function deleteForce(array $ids): void
     {
@@ -64,5 +67,23 @@ class HCAddressRepository extends HCBaseRepository
             /** @var HCAddress $record */
             $record->forceDelete();
         }
+    }
+
+    /**
+     * @param \HoneyComb\Addresses\Http\Requests\HCAddressRequest $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function getOptions (HCAddressRequest $request): Collection
+    {
+        if (!$request->readyForOptions())
+            return new Collection();
+
+        return $this->createBuilderQuery($request)->get()->map (function ($record){
+
+            return [
+                'id' => $record->id,
+                'label' => $record->full_address
+            ];
+        });
     }
 }
