@@ -124,7 +124,20 @@ class HCAddressController extends HCBaseController
             return $this->response->error($e->getMessage());
         }
 
-        return $this->response->success("Created");
+        return $this->response->success("Created", $this->responseData($request, $model->id));
+    }
+
+    /**
+     * @param \HoneyComb\Addresses\Http\Requests\HCAddressRequest $request
+     * @param string $id
+     * @return array|null
+     */
+    protected function responseData(HCAddressRequest $request, string $id)
+    {
+        if ($request->isResponseForOptions())
+            return $this->service->getRepository()->formatForOptions($this->getById($id));
+
+        return null;
     }
 
 
@@ -140,7 +153,7 @@ class HCAddressController extends HCBaseController
         $model = $this->service->getRepository()->findOneBy(['id' => $id]);
         $model->update($request->getRecordData());
 
-        return $this->response->success("Created");
+        return $this->response->success("Updated");
     }
 
 
@@ -222,7 +235,7 @@ class HCAddressController extends HCBaseController
      * @param \HoneyComb\Addresses\Http\Requests\HCAddressRequest $request
      * @return \Illuminate\Support\Collection
      */
-    public function getOptions (HCAddressRequest $request)
+    public function getOptions(HCAddressRequest $request)
     {
         return $this->service->getRepository()->getOptions($request);
     }

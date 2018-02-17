@@ -93,7 +93,7 @@ class HCAddressForm extends HCBaseForm
      */
     public function getStructureNew(string $prefix): array
     {
-        return [
+        $form = [
 
             $prefix . 'country_id' =>
                 [
@@ -113,6 +113,7 @@ class HCAddressForm extends HCBaseForm
 
                         ],
                     ],
+                    'new' => route('admin.api.form-manager', ['regions.city-new']),
                 ],
             $prefix . 'address_line' =>
                 [
@@ -135,6 +136,18 @@ class HCAddressForm extends HCBaseForm
                     'originalLabel' => 'email'
                 ],
         ];
+
+        if (request('hc_options'))
+        {
+            $form[$prefix . 'hc_options'] = [
+                'type' => 'singleLine',
+                'required' => 1,
+                'value' => 1,
+                'hidden' => 1,
+            ];
+        }
+
+        return $form;
     }
 
     /**

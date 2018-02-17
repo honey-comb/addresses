@@ -80,10 +80,15 @@ class HCAddressRepository extends HCBaseRepository
 
         return $this->createBuilderQuery($request)->get()->map (function ($record){
 
-            return [
-                'id' => $record->id,
-                'label' => $record->full_address
-            ];
+            return $this->formatForOptions($record);
         });
+    }
+
+    public function formatForOptions($record)
+    {
+        return [
+            'id' => $record->id,
+            'label' => $record->full_address
+        ];
     }
 }
