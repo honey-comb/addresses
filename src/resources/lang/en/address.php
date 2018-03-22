@@ -6,4 +6,5 @@ return [
     'city_id' => 'City',
     'country' => 'Country',
     'owner' => 'Owner',
+    'label' => 'Label',
 ];

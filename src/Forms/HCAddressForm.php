@@ -95,6 +95,11 @@ class HCAddressForm extends HCBaseForm
     {
         $form = [
 
+            $prefix . 'label' =>
+                [
+                    'type' => 'singleLine',
+                    'label' => trans('HCAddress::address.label'),
+                ],
             $prefix . 'country_id' =>
                 [
                     'type' => 'dropDownList',

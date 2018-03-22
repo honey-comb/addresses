@@ -54,7 +54,12 @@ class HCAddress extends HCUuidModel
      * @var array
      */
     protected $fillable = [
-        'id', 'address_line', 'postal_code', 'city_id', 'user_id',
+        'id',
+        'address_line',
+        'postal_code',
+        'city_id',
+        'user_id',
+        'label',
     ];
 
     /**
@@ -62,18 +67,18 @@ class HCAddress extends HCUuidModel
      */
     protected $with = [
         'city',
-        'user'
+        'user',
     ];
 
     protected $appends = [
         'full_address',
-        'country_id'
+        'country_id',
     ];
 
     /**
      * @return mixed
      */
-    public function getCountryIdAttribute ()
+    public function getCountryIdAttribute()
     {
         return $this->city->country_id;
     }
@@ -81,7 +86,7 @@ class HCAddress extends HCUuidModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function city ()
+    public function city()
     {
         return $this->hasOne(HCCity::class, 'id', 'city_id');
     }
@@ -89,7 +94,7 @@ class HCAddress extends HCUuidModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user ()
+    public function user()
     {
         return $this->hasOne(HCUser::class, 'id', 'user_id');
     }
@@ -97,7 +102,7 @@ class HCAddress extends HCUuidModel
     /**
      * @return string
      */
-    public function getFullAddressAttribute ()
+    public function getFullAddressAttribute()
     {
         return $this->address_line . ', ' . $this->city->translation->label;
     }

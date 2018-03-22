@@ -73,6 +73,7 @@ class HCAddressController extends HCBaseController
     public function getTableColumns(): array
     {
         $columns = [
+            'label' => $this->headerText(trans('HCAddress::address.label')),
             'address_line' => $this->headerText(trans('HCAddress::address.address_line')),
             'postal_code' => $this->headerText(trans('HCAddress::address.postal_code')),
             'city.translation.label' => $this->headerText(trans('HCAddress::address.city_id')),
