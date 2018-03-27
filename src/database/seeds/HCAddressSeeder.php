@@ -31,6 +31,10 @@ namespace HoneyComb\Addresses\database\seeds;
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class HCAddressSeeder
+ * @package HoneyComb\Addresses\database\seeds
+ */
 class HCAddressSeeder extends Seeder
 {
     /**

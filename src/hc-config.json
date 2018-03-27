@@ -5,7 +5,7 @@
         "namespace": "HoneyComb\\Addresses\\"
     },
     "formData": {
-        "address": "HoneyComb\\Addresses\\Forms\\HCAddressForm"
+        "address": "HoneyComb\\Addresses\\Forms\\Admin\\HCAddressForm"
     },
     "adminMenu": [
         {

@@ -21,16 +21,20 @@
  * SOFTWARE.
  *
  * Contact InteractiveSolutions:
- * E-mail: info@interactivesolutions.lt
+ * E-mail: hello@interactivesolutions.lt
  * http://www.interactivesolutions.lt
  */
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Addresses\Http\Requests;
+namespace HoneyComb\Addresses\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class HCAddressRequest
+ * @package HoneyComb\Addresses\Http\Requests\Admin
+ */
 class HCAddressRequest extends FormRequest
 {
     /**
