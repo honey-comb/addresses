@@ -25,6 +25,8 @@
  * http://www.interactivesolutions.lt
  */
 
+declare(strict_types = 1);
+
 namespace HoneyComb\Address\Events\Admin;
 
 use Illuminate\Broadcasting\Channel;
@@ -44,6 +46,7 @@ class HCAddressCreated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $model;
+
     /**
      * Create a new event instance.
      *

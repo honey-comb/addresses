@@ -25,6 +25,8 @@
  * http://www.interactivesolutions.lt
  */
 
+declare(strict_types = 1);
+
 namespace HoneyComb\Address\Events\Admin;
 
 use Illuminate\Broadcasting\Channel;
@@ -35,11 +37,16 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class HCAddressForceDeleted
+ * @package HoneyComb\Address\Events\Admin
+ */
 class HCAddressForceDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $deletedIds;
+
     /**
      * Create a new event instance.
      *
