@@ -29,6 +29,11 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Addresses\Http\Controllers\Admin;
 
+use HoneyComb\Address\Events\Admin\HCAddressCreated;
+use HoneyComb\Address\Events\Admin\HCAddressUpdated;
+use HoneyComb\Address\Events\Admin\HCAddressRestored;
+use HoneyComb\Address\Events\Admin\HCAddressSoftDeleted;
+use HoneyComb\Address\Events\Admin\HCAddressForceDeleted;
 use HoneyComb\Addresses\Services\HCAddressService;
 use HoneyComb\Addresses\Http\Requests\Admin\HCAddressRequest;
 use HoneyComb\Addresses\Models\HCAddress;
@@ -154,6 +159,8 @@ class HCAddressController extends HCBaseController
             return $this->response->error($e->getMessage());
         }
 
+        event(new HCAddressCreated($model));
+
         return $this->response->success("Created", $this->responseData($request, $model->id));
     }
 
@@ -183,6 +190,8 @@ class HCAddressController extends HCBaseController
         $model = $this->service->getRepository()->findOneBy(['id' => $id]);
         $model->update($request->getRecordData());
 
+        event(new HCAddressUpdated($model));
+
         return $this->response->success("Updated");
     }
 
@@ -199,7 +208,7 @@ class HCAddressController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteSoft($request->getListIds());
+            $deletedIds = $this->service->getRepository()->deleteSoft($request->getListIds());
 
             $this->connection->commit();
         } catch (\Throwable $exception) {
@@ -207,6 +216,8 @@ class HCAddressController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCAddressSoftDeleted($deletedIds));
 
         return $this->response->success('Successfully deleted');
     }
@@ -224,7 +235,7 @@ class HCAddressController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->restore($request->getListIds());
+            $restoredIds = $this->service->getRepository()->restore($request->getListIds());
 
             $this->connection->commit();
         } catch (\Throwable $exception) {
@@ -232,6 +243,8 @@ class HCAddressController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCAddressRestored($restoredIds));
 
         return $this->response->success('Successfully restored');
     }
@@ -249,7 +262,7 @@ class HCAddressController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteForce($request->getListIds());
+            $deletedIds = $this->service->getRepository()->deleteForce($request->getListIds());
 
             $this->connection->commit();
         } catch (\Throwable $exception) {
@@ -257,6 +270,8 @@ class HCAddressController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCAddressForceDeleted($deletedIds));
 
         return $this->response->success('Successfully deleted');
     }
