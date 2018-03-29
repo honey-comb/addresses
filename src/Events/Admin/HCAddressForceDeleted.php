@@ -25,8 +25,6 @@
  * http://www.interactivesolutions.lt
  */
 
-declare(strict_types = 1);
-
 namespace HoneyComb\Addresses\Events\Admin;
 
 use Illuminate\Broadcasting\Channel;
