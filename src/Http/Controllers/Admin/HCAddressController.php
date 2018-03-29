@@ -212,7 +212,7 @@ class HCAddressController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $deleted = $this->service->getRepository()->deleteSoft($request->getListIds());
+            $deletedIds = $this->service->getRepository()->deleteSoft($request->getListIds());
 
             $this->connection->commit();
         } catch (\Throwable $exception) {
@@ -221,7 +221,7 @@ class HCAddressController extends HCBaseController
             return $this->response->error($exception->getMessage());
         }
 
-        event(new HCAddressSoftDeleted($deleted));
+        event(new HCAddressSoftDeleted($deletedIds));
 
         return $this->response->success('Successfully deleted');
     }
@@ -239,7 +239,7 @@ class HCAddressController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $restored = $this->service->getRepository()->restore($request->getListIds());
+            $restoredIds = $this->service->getRepository()->restore($request->getListIds());
 
             $this->connection->commit();
         } catch (\Throwable $exception) {
@@ -248,7 +248,7 @@ class HCAddressController extends HCBaseController
             return $this->response->error($exception->getMessage());
         }
 
-        event(new HCAddressRestored($restored));
+        event(new HCAddressRestored($restoredIds));
 
         return $this->response->success('Successfully restored');
     }

@@ -40,7 +40,7 @@ class HCAddressService
     /**
      * @var HCAddressRepository
      */
-    private $repository;
+    protected $repository;
 
     /**
      * HCAddressService constructor.
