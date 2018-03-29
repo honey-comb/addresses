@@ -27,7 +27,7 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Address\Events\Admin;
+namespace HoneyComb\Addresses\Events\Admin;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -45,16 +45,19 @@ class HCAddressUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $model;
-    
+    /**
+     * @var
+     */
+    public $record;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($model)
+    public function __construct($record)
     {
-        $this->model = $model;
+        $this->record = $record;
     }
 
     /**

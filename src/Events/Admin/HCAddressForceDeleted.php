@@ -27,7 +27,7 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Address\Events\Admin;
+namespace HoneyComb\Addresses\Events\Admin;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -45,16 +45,19 @@ class HCAddressForceDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $deletedIds;
+    /**
+     * @var
+     */
+    public $deleted;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($deletedIds)
+    public function __construct($deleted)
     {
-        $this->deletedIds = $deletedIds;
+        $this->deleted = $deleted;
     }
 
     /**

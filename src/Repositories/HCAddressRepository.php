@@ -52,50 +52,68 @@ class HCAddressRepository extends HCBaseRepository
     }
 
     /**
-     * Soft deleting records
-     * @param $ids
-     */
-    public function deleteSoft(array $ids): void
-    {
-        $records = $this->makeQuery()->whereIn('id', $ids)->get();
-
-        foreach ($records as $record) {
-            /** @var HCAddress $record */
-            $record->delete();
-        }
-    }
-
-    /**
-     * Restore soft deleted records
-     *
      * @param array $ids
-     * @return void
-     */
-    public function restore(array $ids): void
-    {
-        $records = $this->makeQuery()->withTrashed()->whereIn('id', $ids)->get();
-
-        foreach ($records as $record) {
-            /** @var HCAddress $record */
-            $record->restore();
-        }
-    }
-
-    /**
-     * Force delete records by given id
-     *
-     * @param array $ids
-     * @return void
+     * @return array
      * @throws \Exception
      */
-    public function deleteForce(array $ids): void
+    public function deleteSoft(array $ids): array
     {
+        $deleted = [];
+
+        $records = $this->makeQuery()->whereIn('id', $ids)->get();
+
+        /** @var HCAddress $record */
+        foreach ($records as $record) {
+
+            if($record->delete()) {
+                $deleted[] = $record;
+            }
+
+        }
+
+        return $deleted;
+    }
+
+    /**
+     * @param array $ids
+     * @return array
+     */
+    public function restore(array $ids): array
+    {
+        $restored = [];
+
         $records = $this->makeQuery()->withTrashed()->whereIn('id', $ids)->get();
 
+        /** @var HCAddress $record */
         foreach ($records as $record) {
-            /** @var HCAddress $record */
-            $record->forceDelete();
+            if($record->restore()) {
+                $restored[] = $record;
+            }
+
         }
+
+        return $restored;
+    }
+
+    /**
+     * @param array $ids
+     * @return array
+     */
+    public function deleteForce(array $ids): array
+    {
+        $deleted = [];
+
+        $records = $this->makeQuery()->withTrashed()->whereIn('id', $ids)->get();
+
+        /** @var HCAddress $record */
+        foreach ($records as $record) {
+            if($record->forceDelete()) {
+                $deleted[] = $record;
+            }
+        }
+
+        return $deleted;
+
     }
 
     /**
