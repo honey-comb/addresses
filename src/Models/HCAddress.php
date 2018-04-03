@@ -33,6 +33,7 @@ use HoneyComb\Core\Models\HCUser;
 use HoneyComb\Core\Models\Traits\HCOwnership;
 use HoneyComb\Regions\Models\HCCity;
 use HoneyComb\Starter\Models\HCUuidModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 /**
@@ -76,25 +77,25 @@ class HCAddress extends HCUuidModel
     ];
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getCountryIdAttribute()
+    public function getCountryIdAttribute(): string
     {
         return $this->city->country_id;
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function city()
+    public function city(): HasOne
     {
         return $this->hasOne(HCCity::class, 'id', 'city_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(HCUser::class, 'id', 'user_id');
     }
@@ -102,7 +103,7 @@ class HCAddress extends HCUuidModel
     /**
      * @return string
      */
-    public function getFullAddressAttribute()
+    public function getFullAddressAttribute(): string
     {
         return $this->address_line . ', ' . $this->city->translation->label;
     }

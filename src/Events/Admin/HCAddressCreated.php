@@ -27,6 +27,7 @@
 
 namespace HoneyComb\Addresses\Events\Admin;
 
+use HoneyComb\Addresses\Models\HCAddress;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -43,6 +44,9 @@ class HCAddressCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @var HCAddress
+     */
     public $record;
 
     /**
@@ -50,7 +54,7 @@ class HCAddressCreated
      *
      * @return void
      */
-    public function __construct($record)
+    public function __construct(HCAddress $record)
     {
         $this->record = $record;
     }
