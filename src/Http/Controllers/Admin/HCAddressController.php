@@ -177,7 +177,6 @@ class HCAddressController extends HCBaseController
         return null;
     }
 
-
     /**
      * Update record
      *
@@ -198,7 +197,6 @@ class HCAddressController extends HCBaseController
 
         return $this->response->success("Updated");
     }
-
 
     /**
      * Soft delete record
@@ -226,7 +224,6 @@ class HCAddressController extends HCBaseController
         return $this->response->success('Successfully deleted');
     }
 
-
     /**
      * Restore record
      *
@@ -252,7 +249,6 @@ class HCAddressController extends HCBaseController
 
         return $this->response->success('Successfully restored');
     }
-
 
     /**
      * Force delete record

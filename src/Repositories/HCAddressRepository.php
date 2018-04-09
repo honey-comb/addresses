@@ -64,11 +64,9 @@ class HCAddressRepository extends HCBaseRepository
 
         /** @var HCAddress $record */
         foreach ($records as $record) {
-
             if($record->delete()) {
                 $deleted[] = $record;
             }
-
         }
 
         return $deleted;
@@ -89,7 +87,6 @@ class HCAddressRepository extends HCBaseRepository
             if($record->restore()) {
                 $restored[] = $record;
             }
-
         }
 
         return $restored;
@@ -113,7 +110,6 @@ class HCAddressRepository extends HCBaseRepository
         }
 
         return $deleted;
-
     }
 
     /**
@@ -131,7 +127,11 @@ class HCAddressRepository extends HCBaseRepository
         });
     }
 
-    public function formatForOptions($record)
+    /**
+     * @param $record
+     * @return array
+     */
+    public function formatForOptions($record):array
     {
         return [
             'id' => $record->id,

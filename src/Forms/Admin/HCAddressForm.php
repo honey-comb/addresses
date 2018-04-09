@@ -112,7 +112,7 @@ class HCAddressForm extends HCBaseForm
                     'type' => 'dropDownList',
                     'label' => trans('HCAddress::address.city_id'),
                     'required' => 1,
-                    'url' => route('admin.api.regions.city.list', [app()->getLocale()]),
+                    'url' => route('admin.api.regions.city.options', [app()->getLocale()]),
                     'dependencies' => [
                         $prefix . 'country_id' => [
 
