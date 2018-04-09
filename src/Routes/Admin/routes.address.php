@@ -43,8 +43,7 @@ Route::prefix(config('hc.admin_url'))
                 ->middleware('acl:honey_comb_addresses_address_admin_list');
 
             Route::get('options', 'HCAddressController@getOptions')
-                ->name('admin.api.address.options')
-                ->middleware('acl:honey_comb_addresses_address_admin_list');
+                ->name('admin.api.address.options');
 
             Route::post('/', 'HCAddressController@store')
                 ->name('admin.api.address.create')
