@@ -142,9 +142,9 @@ class HCAddressForm extends HCBaseForm
                 ],
         ];
 
-        if (request('hc_options'))
+        if (request('hc_new'))
         {
-            $form[$prefix . 'hc_options'] = [
+            $form[$prefix . 'hc_new'] = [
                 'type' => 'singleLine',
                 'required' => 1,
                 'value' => 1,

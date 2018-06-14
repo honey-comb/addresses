@@ -161,20 +161,14 @@ class HCAddressController extends HCBaseController
 
         event(new HCAddressCreated($record));
 
-        return $this->response->success("Created", $this->responseData($request, $record->id));
-    }
+        if ($request->has('hc_new')) {
 
-    /**
-     * @param \HoneyComb\Addresses\Http\Requests\Admin\HCAddressRequest $request
-     * @param string $id
-     * @return array|null
-     */
-    protected function responseData(HCAddressRequest $request, string $id)
-    {
-        if ($request->isResponseForOptions())
-            return $this->service->getRepository()->formatForOptions($this->getById($id));
+            return $this->response->success("Created", $record);
+        } else {
 
-        return null;
+            return $this->response->success("Created");
+        }
+
     }
 
     /**
