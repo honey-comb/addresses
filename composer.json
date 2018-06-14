@@ -8,9 +8,9 @@
     "repositories": [],
     "require": {
         "php": ">=7.1.0",
-        "laravel/framework": "5.5.*",
-        "honey-comb/starter": "0.1.*",
-        "honey-comb/regions": "0.1.*"
+        "laravel/framework": "5.6.*",
+        "honey-comb/starter": "0.2.*",
+        "honey-comb/regions": "0.2.*"
     },
     "require-dev": {
         "brianium/paratest": "^1.0",
