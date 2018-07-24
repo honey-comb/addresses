@@ -31,7 +31,7 @@ namespace HoneyComb\Addresses\Repositories;
 
 use HoneyComb\Addresses\Http\Requests\Admin\HCAddressRequest;
 use HoneyComb\Addresses\Models\HCAddress;
-use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
+use HoneyComb\Starter\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
 use Illuminate\Support\Collection;
 
